@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#5d13ad" />
+    <title>brigaid. Salter Bluetooth Test</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --purple: #5d13ad;
+        --purple-dark: #190d27;
+        --yellow: #f6cb16;
+        --ink: #201729;
+        --muted: #6f6876;
+        --line: #e8e2ef;
+        --panel: #ffffff;
+        --soft: #f8f5fb;
+        --green: #13a66b;
+        --orange: #f0a000;
+        --red: #c93645;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 96% 0%, rgba(246, 203, 22, 0.22), transparent 22rem),
+          radial-gradient(circle at 0% 100%, rgba(93, 19, 173, 0.14), transparent 22rem),
+          #fff;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 28px 0 40px;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 10px;
+        background: var(--purple);
+        color: white;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .dot {
+        color: var(--yellow);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.45rem, 1rem + 1.6vw, 2.1rem);
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+      }
+
+      .tagline {
+        margin: 4px 0 0;
+        font-size: 0.72rem;
+        letter-spacing: 0.32em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 7px 11px;
+        background: var(--yellow);
+        color: var(--purple-dark);
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+        gap: 18px;
+      }
+
+      .card {
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 18px 50px rgba(49, 19, 81, 0.08);
+      }
+
+      .card-inner {
+        padding: clamp(18px, 3vw, 28px);
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 1.22rem;
+        letter-spacing: -0.025em;
+      }
+
+      p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      button {
+        min-height: 44px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 0 15px;
+        background: white;
+        color: var(--ink);
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      button.primary {
+        border-color: var(--purple);
+        background: var(--purple);
+        color: white;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+
+      .status {
+        display: grid;
+        gap: 14px;
+      }
+
+      .reading {
+        display: grid;
+        place-items: center;
+        min-height: 220px;
+        border-radius: 16px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        text-align: center;
+      }
+
+      .reading strong {
+        display: block;
+        font-size: clamp(3rem, 8vw, 5.5rem);
+        line-height: 1;
+        letter-spacing: -0.08em;
+      }
+
+      .reading span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .state {
+        border-radius: 14px;
+        padding: 16px;
+        background: var(--soft);
+        border: 1px solid var(--line);
+        font-weight: 800;
+      }
+
+      .state.ok {
+        background: color-mix(in srgb, var(--green) 14%, white);
+        border-color: color-mix(in srgb, var(--green) 35%, white);
+        color: #064a2f;
+      }
+
+      .state.warn {
+        background: color-mix(in srgb, var(--orange) 18%, white);
+        border-color: color-mix(in srgb, var(--orange) 38%, white);
+        color: #653d00;
+      }
+
+      .state.error {
+        background: color-mix(in srgb, var(--red) 14%, white);
+        border-color: color-mix(in srgb, var(--red) 35%, white);
+        color: #66111c;
+      }
+
+      .checks {
+        display: grid;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .check {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 0.92rem;
+      }
+
+      .check:last-child {
+        border-bottom: 0;
+      }
+
+      .check b {
+        color: var(--ink);
+      }
+
+      .check span {
+        color: var(--muted);
+        text-align: right;
+      }
+
+      pre {
+        overflow: auto;
+        max-height: 320px;
+        margin: 0;
+        padding: 16px;
+        border-radius: 14px;
+        background: #140b1f;
+        color: #f7f1ff;
+        font-size: 0.82rem;
+        line-height: 1.5;
+        white-space: pre-wrap;
+      }
+
+      .help {
+        margin-top: 18px;
+        padding: 16px;
+        border-radius: 14px;
+        background: rgba(246, 203, 22, 0.18);
+        border: 1px solid rgba(246, 203, 22, 0.48);
+      }
+
+      .help p {
+        margin: 0;
+        color: var(--ink);
+      }
+
+      @media (max-width: 860px) {
+        header {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="brand" aria-label="brigaid">
+          <div class="mark">b<span class="dot">.</span></div>
+          <div>
+            <h1>brigaid<span class="dot">.</span></h1>
+            <p class="tagline">complete kitchen optimisation</p>
+          </div>
+        </div>
+        <span class="badge">Salter Bluetooth test</span>
+      </header>
+
+      <section class="grid">
+        <div class="card">
+          <div class="card-inner">
+            <h2>Connect directly to the Salter scale</h2>
+            <p>
+              This standalone page avoids the Perplexity preview iframe and tests the Salter BLE connection directly in your
+              browser. Use Chrome or Edge on a laptop, desktop, or Android device.
+            </p>
+            <p>
+              Turn the scale on, make sure it is not connected to another phone/app, then press the connect button below.
+            </p>
+
+            <div class="actions">
+              <button id="connectFiltered" class="primary">Connect Salter scale</button>
+              <button id="connectAny">Advanced: choose any BLE device</button>
+              <button id="tare" disabled>Tare / zero</button>
+              <button id="disconnect" disabled>Disconnect</button>
+            </div>
+
+            <div class="checks" aria-label="Browser diagnostic checks">
+              <div class="check"><b>Secure page</b><span id="secureCheck">Checking...</span></div>
+              <div class="check"><b>Web Bluetooth available</b><span id="bluetoothCheck">Checking...</span></div>
+              <div class="check"><b>Connection</b><span id="connectionCheck">Not connected</span></div>
+              <div class="check"><b>Salter service FFE0</b><span id="serviceCheck">Waiting</span></div>
+              <div class="check"><b>Weight notify FFE1</b><span id="notifyCheck">Waiting</span></div>
+              <div class="check"><b>Tare write FFE3</b><span id="tareCheck">Waiting</span></div>
+            </div>
+
+            <div class="help">
+              <p>
+                If you still see “permissions policy” here, the page is still being opened inside another app or preview.
+                Copy the URL and paste it into Chrome or Edge as a normal browser tab.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="status">
+          <div class="reading" aria-live="polite">
+            <div>
+              <strong id="weight">0.0</strong>
+              <span id="unit">g</span>
+            </div>
+          </div>
+          <div id="state" class="state">Waiting for a scale connection.</div>
+          <pre id="log" aria-label="Connection log"></pre>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const SALTER_SERVICE = "0000ffe0-0000-1000-8000-00805f9b34fb";
+      const WEIGHT_CHARACTERISTIC = "0000ffe1-0000-1000-8000-00805f9b34fb";
+      const TARE_CHARACTERISTIC = "0000ffe3-0000-1000-8000-00805f9b34fb";
+      const TARE_COMMAND = new Uint8Array([0x09, 0x03, 0x05]);
+
+      let device = null;
+      let server = null;
+      let service = null;
+      let tareCharacteristic = null;
+      let weightCharacteristic = null;
+
+      const el = {
+        connectFiltered: document.getElementById("connectFiltered"),
+        connectAny: document.getElementById("connectAny"),
+        disconnect: document.getElementById("disconnect"),
+        tare: document.getElementById("tare"),
+        weight: document.getElementById("weight"),
+        unit: document.getElementById("unit"),
+        state: document.getElementById("state"),
+        log: document.getElementById("log"),
+        secureCheck: document.getElementById("secureCheck"),
+        bluetoothCheck: document.getElementById("bluetoothCheck"),
+        connectionCheck: document.getElementById("connectionCheck"),
+        serviceCheck: document.getElementById("serviceCheck"),
+        notifyCheck: document.getElementById("notifyCheck"),
+        tareCheck: document.getElementById("tareCheck"),
+      };
+
+      function log(message) {
+        const time = new Date().toLocaleTimeString();
+        el.log.textContent = `[${time}] ${message}\n` + el.log.textContent;
+      }
+
+      function setState(message, tone = "") {
+        el.state.textContent = message;
+        el.state.className = `state ${tone}`;
+      }
+
+      function updateDiagnostics() {
+        el.secureCheck.textContent = window.isSecureContext ? "Yes" : "No";
+        el.bluetoothCheck.textContent = "bluetooth" in navigator ? "Yes" : "No";
+        if (!window.isSecureContext) {
+          setState("This page is not HTTPS, so Bluetooth will be blocked.", "error");
+        } else if (!("bluetooth" in navigator)) {
+          setState("This browser does not expose Web Bluetooth. Use Chrome or Edge on desktop/Android.", "error");
+        }
+      }
+
+      function decodeWeight(event) {
+        const data = event.target.value;
+        if (!data || data.byteLength !== 7) {
+          log(`Ignored packet with length ${data ? data.byteLength : 0}; expected 7 bytes.`);
+          return;
+        }
+
+        const bytes = Array.from({ length: data.byteLength }, (_, index) => data.getUint8(index));
+        const rawWeight = bytes[4] * 256 + bytes[5];
+        const unitCode = bytes[6];
+
+        let value = rawWeight;
+        let unit = "g";
+
+        if (unitCode === 1) {
+          value = rawWeight / 10;
+          unit = "oz";
+        } else if (unitCode === 2) {
+          value = rawWeight;
+          unit = "ml";
+        } else if (unitCode === 3) {
+          value = rawWeight / 10;
+          unit = "fl oz";
+        }
+
+        el.weight.textContent = value.toFixed(unit === "g" || unit === "ml" ? 0 : 1);
+        el.unit.textContent = unit;
+        setState(`Receiving Salter readings: ${el.weight.textContent} ${unit}`, "ok");
+        log(`Reading ${el.weight.textContent} ${unit} · packet ${bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")}`);
+      }
+
+      async function connect(options) {
+        updateDiagnostics();
+        if (!("bluetooth" in navigator)) return;
+
+        try {
+          setState("Opening Bluetooth chooser...");
+          log("Requesting Bluetooth device.");
+          device = await navigator.bluetooth.requestDevice(options);
+          el.connectionCheck.textContent = `Selected ${device.name || "unnamed device"}`;
+          log(`Selected: ${device.name || "unnamed device"} (${device.id})`);
+
+          device.addEventListener("gattserverdisconnected", () => {
+            el.connectionCheck.textContent = "Disconnected";
+            el.disconnect.disabled = true;
+            el.tare.disabled = true;
+            setState("Scale disconnected.", "warn");
+            log("Device disconnected.");
+          });
+
+          log("Connecting to GATT server.");
+          server = await device.gatt.connect();
+          el.connectionCheck.textContent = "Connected";
+
+          log("Getting Salter service FFE0.");
+          service = await server.getPrimaryService(SALTER_SERVICE);
+          el.serviceCheck.textContent = "Found";
+
+          log("Getting weight characteristic FFE1.");
+          weightCharacteristic = await service.getCharacteristic(WEIGHT_CHARACTERISTIC);
+          el.notifyCheck.textContent = "Found";
+          weightCharacteristic.addEventListener("characteristicvaluechanged", decodeWeight);
+
+          log("Starting weight notifications.");
+          await weightCharacteristic.startNotifications();
+          el.notifyCheck.textContent = "Listening";
+
+          try {
+            log("Getting tare characteristic FFE3.");
+            tareCharacteristic = await service.getCharacteristic(TARE_CHARACTERISTIC);
+            el.tareCheck.textContent = "Found";
+            el.tare.disabled = false;
+          } catch (tareError) {
+            el.tareCheck.textContent = "Not found";
+            log(`Tare characteristic not available: ${tareError.message}`);
+          }
+
+          el.disconnect.disabled = false;
+          setState("Connected. Waiting for weight readings from the scale.", "ok");
+        } catch (error) {
+          const message = error && error.message ? error.message : String(error);
+          log(`Connection failed: ${error.name || "Error"} · ${message}`);
+          el.connectionCheck.textContent = "Failed";
+          setState(message, error.name === "NotFoundError" ? "warn" : "error");
+        }
+      }
+
+      el.connectFiltered.addEventListener("click", () => {
+        connect({
+          filters: [{ services: [SALTER_SERVICE] }],
+          optionalServices: [SALTER_SERVICE],
+        });
+      });
+
+      el.connectAny.addEventListener("click", () => {
+        connect({
+          acceptAllDevices: true,
+          optionalServices: [SALTER_SERVICE],
+        });
+      });
+
+      el.tare.addEventListener("click", async () => {
+        if (!tareCharacteristic) return;
+        try {
+          log("Writing Salter tare command 09 03 05.");
+          await tareCharacteristic.writeValueWithResponse(TARE_COMMAND);
+          setState("Tare command sent. Add the ingredient once the scale returns to zero.", "ok");
+        } catch (error) {
+          log(`Tare failed: ${error.message}`);
+          setState(`Tare failed: ${error.message}`, "error");
+        }
+      });
+
+      el.disconnect.addEventListener("click", () => {
+        if (device && device.gatt && device.gatt.connected) {
+          device.gatt.disconnect();
+        }
+      });
+
+      updateDiagnostics();
+      log("Brigaid standalone Bluetooth test loaded.");
+    </script>
+  </body>
+</html>
