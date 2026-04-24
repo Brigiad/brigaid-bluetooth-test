@@ -4,7 +4,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#1a2340" />
-    <title>brigaid. Salter Weighing Test</title>
+    <title>brigaid. Complete Kitchen Optimisation</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
         color-scheme: light;
@@ -12,6 +25,7 @@
         --navy-soft: #2a3557;
         --coral: #ef6a5a;
         --coral-soft: #f59488;
+        --pink: #f2b6ac;
         --cream: #fbf4ec;
         --blush: #f4d9cf;
         --ink: #1a2340;
@@ -37,32 +51,26 @@
       }
 
       body {
-        font-family:
-          ui-sans-serif,
-          system-ui,
-          -apple-system,
-          BlinkMacSystemFont,
-          "Segoe UI",
-          sans-serif;
+        font-family: "Nunito", "Quicksand", ui-sans-serif, system-ui, -apple-system, sans-serif;
         color: var(--ink);
         background:
           radial-gradient(circle at 90% -10%, rgba(239, 106, 90, 0.22), transparent 28rem),
-          radial-gradient(circle at -10% 110%, rgba(26, 35, 64, 0.12), transparent 26rem),
+          radial-gradient(circle at -10% 110%, rgba(242, 182, 172, 0.28), transparent 26rem),
           var(--cream);
       }
 
       main {
         width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 26px 0 48px;
+        padding: 26px 0 56px;
       }
 
-      header {
+      header.topbar {
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 18px;
-        margin-bottom: 28px;
+        margin-bottom: 22px;
       }
 
       .brand {
@@ -76,12 +84,13 @@
         place-items: center;
         width: 46px;
         height: 46px;
-        border-radius: 12px;
+        border-radius: 14px;
         background: var(--navy);
         color: var(--cream);
-        font-weight: 800;
+        font-weight: 900;
         letter-spacing: -0.06em;
         font-size: 1.25rem;
+        font-family: "Quicksand", sans-serif;
       }
 
       .dot {
@@ -93,6 +102,8 @@
         font-size: clamp(1.4rem, 1rem + 1.4vw, 1.9rem);
         line-height: 1.05;
         letter-spacing: -0.04em;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
       }
 
       .tagline {
@@ -101,6 +112,7 @@
         letter-spacing: 0.3em;
         text-transform: uppercase;
         color: var(--muted);
+        font-weight: 700;
       }
 
       .badge {
@@ -111,11 +123,71 @@
         background: var(--navy);
         color: var(--cream);
         font-size: 0.78rem;
-        font-weight: 700;
+        font-weight: 800;
         letter-spacing: 0.04em;
       }
 
-      .grid {
+      /* Tab navigation */
+      nav.tabs {
+        display: flex;
+        gap: 6px;
+        margin-bottom: 22px;
+        padding: 6px;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(26, 35, 64, 0.06);
+        overflow-x: auto;
+      }
+
+      nav.tabs button {
+        flex: 1 1 auto;
+        min-width: max-content;
+        min-height: 42px;
+        border: 0;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        padding: 0 16px;
+        transition: all 160ms ease;
+      }
+
+      nav.tabs button.active {
+        background: var(--navy);
+        color: var(--cream);
+        box-shadow: 0 6px 18px rgba(26, 35, 64, 0.22);
+      }
+
+      nav.tabs button:hover:not(.active) {
+        background: var(--blush);
+        color: var(--navy);
+      }
+
+      .view {
+        display: none;
+        animation: fadein 240ms ease;
+      }
+
+      .view.active {
+        display: block;
+      }
+
+      @keyframes fadein {
+        from {
+          opacity: 0;
+          transform: translateY(4px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+
+      .grid-two {
         display: grid;
         grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
         gap: 22px;
@@ -135,8 +207,10 @@
 
       h2 {
         margin: 0 0 10px;
-        font-size: 1.15rem;
+        font-size: 1.2rem;
         letter-spacing: -0.02em;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
       }
 
       h3 {
@@ -154,6 +228,7 @@
         line-height: 1.5;
       }
 
+      /* Phone */
       .phone {
         position: relative;
         width: 100%;
@@ -205,6 +280,8 @@
         border-radius: 18px;
         padding: 16px 18px;
         margin-bottom: 14px;
+        position: relative;
+        overflow: hidden;
       }
 
       .recipe-card .eyebrow {
@@ -212,13 +289,14 @@
         letter-spacing: 0.2em;
         text-transform: uppercase;
         color: var(--coral-soft);
-        font-weight: 700;
+        font-weight: 800;
       }
 
       .recipe-card h4 {
         margin: 4px 0 2px;
         font-size: 1.15rem;
         letter-spacing: -0.02em;
+        font-family: "Quicksand", sans-serif;
       }
 
       .recipe-card .step {
@@ -242,7 +320,7 @@
       }
 
       .ingredient .target {
-        font-weight: 800;
+        font-weight: 900;
         color: var(--coral);
       }
 
@@ -261,10 +339,11 @@
 
       .weigh-panel .reading {
         font-size: clamp(2.8rem, 9vw, 4.2rem);
-        font-weight: 800;
+        font-weight: 900;
         letter-spacing: -0.06em;
         line-height: 1;
         color: var(--navy);
+        font-family: "Quicksand", sans-serif;
       }
 
       .weigh-panel .reading small {
@@ -366,18 +445,22 @@
         color: var(--muted);
       }
 
-      .field input {
+      .field input,
+      .field select,
+      .field textarea {
         border: 1px solid var(--line);
         border-radius: 12px;
         padding: 12px 14px;
         font: inherit;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--ink);
         background: var(--cream);
         min-height: 44px;
       }
 
-      .field input:focus {
+      .field input:focus,
+      .field select:focus,
+      .field textarea:focus {
         outline: 2px solid var(--coral);
         outline-offset: 2px;
       }
@@ -401,7 +484,8 @@
         cursor: pointer;
         transition:
           transform 120ms ease,
-          background-color 160ms ease;
+          background-color 160ms ease,
+          box-shadow 160ms ease;
       }
 
       button:hover:not(:disabled) {
@@ -418,6 +502,17 @@
         border-color: var(--navy);
         background: var(--navy);
         color: var(--cream);
+      }
+
+      button.ghost {
+        background: transparent;
+        border-color: var(--line);
+      }
+
+      button.danger {
+        border-color: var(--red);
+        background: transparent;
+        color: var(--red);
       }
 
       button:disabled {
@@ -484,7 +579,7 @@
 
       pre {
         overflow: auto;
-        max-height: 240px;
+        max-height: 200px;
         margin: 14px 0 0;
         padding: 14px;
         border-radius: 14px;
@@ -582,6 +677,7 @@
         padding: 8px 6px;
         border-bottom: 1px dashed var(--line);
         font-size: 0.88rem;
+        cursor: pointer;
       }
 
       .checklist-row:last-child {
@@ -653,30 +749,324 @@
 
       .tile .value {
         font-size: 1.3rem;
-        font-weight: 800;
+        font-weight: 900;
         letter-spacing: -0.02em;
         color: var(--navy);
+        font-family: "Quicksand", sans-serif;
+      }
+
+      /* Home tiles */
+      .hero {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 22px;
+        align-items: stretch;
+      }
+
+      .hero-card {
+        background: linear-gradient(135deg, var(--navy) 0%, #263466 100%);
+        color: var(--cream);
+        border-radius: 22px;
+        padding: clamp(22px, 3vw, 32px);
+        box-shadow: 0 22px 50px rgba(26, 35, 64, 0.22);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        right: -60px;
+        top: -60px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(239, 106, 90, 0.7), transparent 70%);
+      }
+
+      .hero-card h2 {
+        font-size: clamp(1.6rem, 2.2vw, 2.2rem);
+        color: var(--cream);
+        margin: 8px 0 10px;
+      }
+
+      .hero-card p {
+        color: rgba(251, 244, 236, 0.85);
+        max-width: 46ch;
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin-top: 18px;
+      }
+
+      .hero-stats .tile {
+        background: rgba(251, 244, 236, 0.08);
+        border: 1px solid rgba(251, 244, 236, 0.16);
+        color: var(--cream);
+      }
+
+      .hero-stats .tile .label {
+        color: rgba(251, 244, 236, 0.7);
+      }
+
+      .hero-stats .tile .value {
+        color: var(--cream);
+      }
+
+      .quick-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .quick-actions button {
+        min-height: 58px;
+      }
+
+      .feature-card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: clamp(20px, 2.5vw, 26px);
+        box-shadow: 0 18px 44px rgba(26, 35, 64, 0.08);
+      }
+
+      .feature-card.coral {
+        background: linear-gradient(140deg, var(--coral) 0%, #f88774 100%);
+        color: white;
+        border: 0;
+      }
+
+      .feature-card.coral h2,
+      .feature-card.coral p {
+        color: white;
+      }
+
+      .feature-card.pink {
+        background: linear-gradient(140deg, var(--blush) 0%, var(--pink) 100%);
+        border: 0;
+      }
+
+      /* Library */
+      .library-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 16px;
+        margin-top: 12px;
+      }
+
+      .recipe-tile {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 12px 30px rgba(26, 35, 64, 0.08);
+        display: flex;
+        flex-direction: column;
+        transition: transform 160ms ease, box-shadow 160ms ease;
+      }
+
+      .recipe-tile:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 42px rgba(26, 35, 64, 0.14);
+      }
+
+      .recipe-tile .thumb {
+        height: 140px;
+        background: linear-gradient(140deg, var(--blush), var(--pink));
+        display: grid;
+        place-items: center;
+        color: var(--navy);
+        font-family: "Quicksand", sans-serif;
+        font-weight: 800;
+        font-size: 1.1rem;
+        position: relative;
+      }
+
+      .recipe-tile .thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .recipe-tile .body {
+        padding: 14px 16px 16px;
+      }
+
+      .recipe-tile h4 {
+        margin: 0 0 4px;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        font-size: 1.05rem;
+      }
+
+      .recipe-tile .meta {
+        font-size: 0.78rem;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .recipe-tile .tile-actions {
+        display: flex;
+        gap: 8px;
+        padding: 0 12px 12px;
+      }
+
+      .recipe-tile .tile-actions button {
+        flex: 1;
+        min-height: 38px;
+        font-size: 0.82rem;
+        border-radius: 10px;
+      }
+
+      .empty {
+        padding: 32px;
+        text-align: center;
+        border: 2px dashed var(--line);
+        border-radius: 18px;
+        color: var(--muted);
+        background: var(--panel);
+      }
+
+      /* New Recipe */
+      .new-recipe-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+      }
+
+      .image-drop {
+        border: 2px dashed var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        text-align: center;
+        background: var(--cream);
+        cursor: pointer;
+        min-height: 160px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .image-drop img {
+        max-width: 100%;
+        max-height: 200px;
+        border-radius: 10px;
+      }
+
+      .ingredient-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        gap: 8px;
+        align-items: center;
+        padding: 10px;
+        background: var(--cream);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        margin-bottom: 8px;
+      }
+
+      .ingredient-row input {
+        border: 1px solid var(--line);
+        background: white;
+        border-radius: 10px;
+        padding: 10px 12px;
+        font: inherit;
+        font-weight: 600;
+        min-height: 40px;
+      }
+
+      .ingredient-row .order-badge {
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: var(--coral);
+        color: white;
+        font-weight: 800;
+        font-size: 0.82rem;
+      }
+
+      .ingredient-row button.rm {
+        min-height: 40px;
+        background: transparent;
+        border: 1px solid var(--red);
+        color: var(--red);
+        border-radius: 10px;
+        font-size: 0.82rem;
+        padding: 0 10px;
+      }
+
+      .add-ing-row {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        gap: 8px;
+        align-items: end;
+        margin-top: 10px;
+      }
+
+      .toast {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--navy);
+        color: var(--cream);
+        padding: 12px 20px;
+        border-radius: 12px;
+        font-weight: 700;
+        z-index: 100;
+        opacity: 0;
+        transition: opacity 200ms ease, transform 200ms ease;
+        box-shadow: 0 12px 30px rgba(26, 35, 64, 0.3);
+        pointer-events: none;
+      }
+
+      .toast.show {
+        opacity: 1;
+        transform: translateX(-50%) translateY(-6px);
+      }
+
+      .notice {
+        background: var(--blush);
+        border: 1px solid var(--coral-soft);
+        border-radius: 12px;
+        padding: 10px 14px;
+        font-size: 0.82rem;
+        color: var(--navy);
+        margin-bottom: 14px;
       }
 
       @media (max-width: 880px) {
-        header {
+        header.topbar {
           align-items: flex-start;
           flex-direction: column;
         }
-
-        .grid {
+        .grid-two,
+        .hero,
+        .new-recipe-grid {
           grid-template-columns: 1fr;
         }
-
         .phone {
           max-width: 360px;
+        }
+        .ingredient-row,
+        .add-ing-row {
+          grid-template-columns: 1fr 1fr;
         }
       }
     </style>
   </head>
   <body>
     <main>
-      <header>
+      <header class="topbar">
         <div class="brand" aria-label="brigaid">
           <div class="mark">b<span class="dot">.</span></div>
           <div>
@@ -684,118 +1074,326 @@
             <p class="tagline">complete kitchen optimisation</p>
           </div>
         </div>
-        <span class="badge">Salter weighing test</span>
+        <span class="badge">Test build · Salter BLE</span>
       </header>
 
-      <section class="grid">
-        <!-- Left: iPhone-style app preview -->
-        <div class="phone" aria-label="Brigaid app preview">
-          <div class="phone-screen">
-            <div class="phone-top">
-              <small>9:41</small>
-              <small>brigaid<span class="dot">.</span></small>
-            </div>
+      <nav class="tabs" role="tablist">
+        <button data-view="home" class="active">Home</button>
+        <button data-view="library">Library</button>
+        <button data-view="new">New recipe</button>
+        <button data-view="weigh">Weigh</button>
+      </nav>
 
-            <div class="recipe-card">
-              <div class="eyebrow" id="recipeEyebrow">Station · Cold Larder</div>
-              <h4 id="recipeName">Caesar Salad</h4>
-              <div class="step" id="recipeStep">Step 1 of 6 · Romaine lettuce</div>
+      <!-- HOME -->
+      <section class="view active" data-view-panel="home">
+        <div class="hero">
+          <div class="hero-card">
+            <div style="display: flex; align-items: center; gap: 10px">
+              <div
+                style="
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 50%;
+                  background: var(--coral);
+                  box-shadow: 0 0 0 4px rgba(239, 106, 90, 0.2);
+                "
+              ></div>
+              <small style="font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0.8">
+                Live pilot · Standalone test
+              </small>
             </div>
-
-            <div class="ingredient">
-              <div>
-                <div class="name" id="ingredientName">Parmesan, grated</div>
-                <div style="font-size: 0.78rem; color: var(--muted); font-weight: 600">
-                  Tolerance <span id="toleranceLabel">±2</span> g
-                </div>
-              </div>
-              <div class="target"><span id="targetLabel">30</span> g</div>
-            </div>
-
-            <div id="panel" class="weigh-panel idle" aria-live="polite">
-              <div class="reading">
-                <span id="weight">0</span><small id="unit">g</small>
-              </div>
-              <div class="status-text" id="statusText">Place ingredient</div>
-              <div class="delta" id="deltaText">Awaiting scale…</div>
-            </div>
-
-            <div class="split">
+            <h2>Weigh every ingredient with precision.</h2>
+            <p>
+              brigaid pairs directly with a Salter Bluetooth kitchen scale, loads your station's recipes, and guides
+              your team through each ingredient — amber, green, red — until every plate leaves the pass consistent.
+            </p>
+            <div class="hero-stats">
               <div class="tile">
-                <div class="label">Target</div>
-                <div class="value"><span id="targetTile">30</span> g</div>
+                <div class="label">Saved recipes</div>
+                <div class="value" id="homeRecipeCount">0</div>
               </div>
               <div class="tile">
-                <div class="label">Difference</div>
-                <div class="value" id="diffTile">—</div>
+                <div class="label">Ingredients tracked</div>
+                <div class="value" id="homeIngCount">0</div>
               </div>
             </div>
+            <div class="quick-actions">
+              <button class="primary" data-go="new">+ New recipe</button>
+              <button class="secondary" data-go="weigh">Start weighing</button>
+            </div>
+          </div>
 
-            <div class="step-nav">
-              <button id="prevStep" type="button">← Previous</button>
-              <button id="nextStep" type="button">Next →</button>
+          <div style="display: grid; gap: 14px">
+            <div class="feature-card coral">
+              <h3 style="color: rgba(255, 255, 255, 0.75)">Scale</h3>
+              <h2>Salter 9197</h2>
+              <p>
+                Service FFE0 · notify FFE1 · tare FFE3. Tap <b>Start weighing</b> then connect in the Weigh view using
+                Chrome or Edge on desktop or Android.
+              </p>
+            </div>
+            <div class="feature-card pink">
+              <h3 style="color: var(--navy)">Library</h3>
+              <h2 style="color: var(--navy)">Your recipe shelf</h2>
+              <p style="color: var(--navy)">
+                Build a recipe once, run it on every shift. Images, ingredients, tolerances — all stored on this device
+                for the testing phase.
+              </p>
+              <div style="display: flex; gap: 10px; margin-top: 8px">
+                <button data-go="library">Open library</button>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Right: connection + controls -->
-        <div>
-          <div class="card">
-            <div class="card-inner">
-              <div class="recipe-select">
-                <label for="recipeSelect">Recipe</label>
-                <select id="recipeSelect"></select>
-              </div>
-
-              <h3>Weighing test</h3>
-              <h2 id="weighTitle">Caesar Salad · Romaine lettuce</h2>
-              <p>
-                Set a target weight and tolerance, connect the Salter scale, then add the ingredient. The panel turns
-                <b style="color: var(--amber)">amber</b> while under, <b style="color: var(--green)">green</b> within
-                tolerance, and <b style="color: var(--red)">coral</b> when over.
-              </p>
-
-              <div class="controls">
-                <div class="field">
-                  <label for="targetInput">Target (g)</label>
-                  <input id="targetInput" type="number" min="0" step="1" value="30" inputmode="numeric" />
+        <div class="card" style="margin-top: 22px">
+          <div class="card-inner">
+            <h3>Getting started</h3>
+            <h2>Three steps to your first cook</h2>
+            <div
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 14px;
+                margin-top: 12px;
+              "
+            >
+              <div class="tile" style="padding: 16px">
+                <div class="label">Step 1</div>
+                <div style="font-weight: 800; margin-top: 4px; font-family: 'Quicksand', sans-serif; font-size: 1.05rem">
+                  Create a recipe
                 </div>
-                <div class="field">
-                  <label for="toleranceInput">Tolerance ± (g)</label>
-                  <input id="toleranceInput" type="number" min="0" step="1" value="2" inputmode="numeric" />
-                </div>
-              </div>
-
-              <div class="actions">
-                <button id="connectFiltered" class="primary">Connect Salter scale</button>
-                <button id="tare" class="secondary" disabled>Tare / zero</button>
-                <button id="connectAny">Advanced: any BLE device</button>
-                <button id="disconnect" disabled>Disconnect</button>
-              </div>
-
-              <div id="state" class="state">Waiting for a scale connection.</div>
-
-              <div class="checks" aria-label="Browser diagnostic checks">
-                <div class="check"><b>Secure page</b><span id="secureCheck">Checking…</span></div>
-                <div class="check"><b>Web Bluetooth</b><span id="bluetoothCheck">Checking…</span></div>
-                <div class="check"><b>Connection</b><span id="connectionCheck">Not connected</span></div>
-                <div class="check"><b>Service FFE0</b><span id="serviceCheck">Waiting</span></div>
-                <div class="check"><b>Notify FFE1</b><span id="notifyCheck">Waiting</span></div>
-                <div class="check"><b>Tare write FFE3</b><span id="tareCheck">Waiting</span></div>
-              </div>
-
-              <div class="help">
-                <p>
-                  If Bluetooth is blocked by "permissions policy", you are still inside a preview iframe. Copy the URL
-                  into a fresh Chrome or Edge tab on desktop or Android.
+                <p style="margin-top: 6px; font-size: 0.86rem">
+                  Name the dish, optionally add an image, and list ingredients in order with weights and tolerances.
                 </p>
               </div>
+              <div class="tile" style="padding: 16px">
+                <div class="label">Step 2</div>
+                <div style="font-weight: 800; margin-top: 4px; font-family: 'Quicksand', sans-serif; font-size: 1.05rem">
+                  Connect Salter
+                </div>
+                <p style="margin-top: 6px; font-size: 0.86rem">
+                  In the Weigh view, tap "Connect Salter scale" and pick it from the browser chooser.
+                </p>
+              </div>
+              <div class="tile" style="padding: 16px">
+                <div class="label">Step 3</div>
+                <div style="font-weight: 800; margin-top: 4px; font-family: 'Quicksand', sans-serif; font-size: 1.05rem">
+                  Cook to colour
+                </div>
+                <p style="margin-top: 6px; font-size: 0.86rem">
+                  Follow amber → green → red feedback and advance when the Next button pulses green.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-              <pre id="log" aria-label="Connection log"></pre>
+      <!-- LIBRARY -->
+      <section class="view" data-view-panel="library">
+        <div class="card">
+          <div class="card-inner">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px">
+              <div>
+                <h3>Library</h3>
+                <h2>Your saved recipes</h2>
+                <p>
+                  Recipes are stored locally in this browser (localStorage) — this is a temporary testing setup for the
+                  GitHub Pages demo. Clearing site data will remove them.
+                </p>
+              </div>
+              <button class="primary" data-go="new">+ New recipe</button>
+            </div>
+            <div id="libraryGrid" class="library-grid"></div>
+          </div>
+        </div>
+      </section>
 
-              <div class="checklist" aria-label="Recipe ingredient checklist">
-                <h3>Ingredient checklist</h3>
-                <div id="checklist"></div>
+      <!-- NEW RECIPE -->
+      <section class="view" data-view-panel="new">
+        <div class="card">
+          <div class="card-inner">
+            <h3>Build recipe</h3>
+            <h2 id="newRecipeHeading">Create a new recipe</h2>
+            <div class="notice">
+              Saved locally in this browser (localStorage). No backend — data stays on this device only, for testing.
+            </div>
+
+            <div class="new-recipe-grid">
+              <div>
+                <div class="field">
+                  <label for="newName">Recipe / menu item</label>
+                  <input id="newName" type="text" placeholder="e.g. Caesar Salad" maxlength="80" />
+                </div>
+                <div class="field" style="margin-top: 12px">
+                  <label for="newStation">Station (optional)</label>
+                  <input id="newStation" type="text" placeholder="e.g. Cold Larder" maxlength="60" />
+                </div>
+                <div class="field" style="margin-top: 12px">
+                  <label>Dish image (optional)</label>
+                  <label class="image-drop" for="newImage" id="imageDrop">
+                    <div id="imageDropInner">
+                      <div style="font-weight: 800; color: var(--navy)">Tap to upload image</div>
+                      <div style="font-size: 0.82rem; color: var(--muted); margin-top: 4px">
+                        Auto-resized to 480px · JPEG
+                      </div>
+                    </div>
+                  </label>
+                  <input id="newImage" type="file" accept="image/*" hidden />
+                  <button id="clearImage" class="ghost" type="button" style="margin-top: 8px; display: none">
+                    Remove image
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3>Ingredients</h3>
+                <p style="margin-bottom: 10px; font-size: 0.88rem">
+                  Added one at a time, in the order your team will weigh them.
+                </p>
+                <div id="ingredientsList"></div>
+
+                <div class="add-ing-row">
+                  <div class="field">
+                    <label for="ingName">Name</label>
+                    <input id="ingName" type="text" placeholder="e.g. Parmesan, grated" maxlength="60" />
+                  </div>
+                  <div class="field">
+                    <label for="ingTarget">Target (g)</label>
+                    <input id="ingTarget" type="number" min="0" step="1" inputmode="numeric" />
+                  </div>
+                  <div class="field">
+                    <label for="ingTol">Tolerance ± (g)</label>
+                    <input id="ingTol" type="number" min="0" step="1" inputmode="numeric" value="2" />
+                  </div>
+                  <button id="addIngredient" class="secondary" type="button">Add</button>
+                </div>
+
+                <div class="actions" style="margin-top: 18px">
+                  <button id="saveRecipe" class="primary" type="button">Save recipe</button>
+                  <button id="resetRecipe" class="ghost" type="button">Reset form</button>
+                </div>
+                <div id="newRecipeState" class="state" style="display: none"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- WEIGH -->
+      <section class="view" data-view-panel="weigh">
+        <div class="grid-two">
+          <!-- Left: iPhone-style app preview -->
+          <div class="phone" aria-label="Brigaid app preview">
+            <div class="phone-screen">
+              <div class="phone-top">
+                <small>9:41</small>
+                <small>brigaid<span class="dot">.</span></small>
+              </div>
+
+              <div class="recipe-card">
+                <div class="eyebrow" id="recipeEyebrow">Station · Cold Larder</div>
+                <h4 id="recipeName">Caesar Salad</h4>
+                <div class="step" id="recipeStep">Step 1 of 6 · Romaine lettuce</div>
+              </div>
+
+              <div class="ingredient">
+                <div>
+                  <div class="name" id="ingredientName">Romaine lettuce</div>
+                  <div style="font-size: 0.78rem; color: var(--muted); font-weight: 600">
+                    Tolerance <span id="toleranceLabel">±10</span> g
+                  </div>
+                </div>
+                <div class="target"><span id="targetLabel">180</span> g</div>
+              </div>
+
+              <div id="panel" class="weigh-panel idle" aria-live="polite">
+                <div class="reading">
+                  <span id="weight">0</span><small id="unit">g</small>
+                </div>
+                <div class="status-text" id="statusText">Place ingredient</div>
+                <div class="delta" id="deltaText">Awaiting scale…</div>
+              </div>
+
+              <div class="split">
+                <div class="tile">
+                  <div class="label">Target</div>
+                  <div class="value"><span id="targetTile">180</span> g</div>
+                </div>
+                <div class="tile">
+                  <div class="label">Difference</div>
+                  <div class="value" id="diffTile">—</div>
+                </div>
+              </div>
+
+              <div class="step-nav">
+                <button id="prevStep" type="button">← Previous</button>
+                <button id="nextStep" type="button">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: connection + controls -->
+          <div>
+            <div class="card">
+              <div class="card-inner">
+                <div class="recipe-select">
+                  <label for="recipeSelect">Recipe</label>
+                  <select id="recipeSelect"></select>
+                </div>
+
+                <h3>Weighing</h3>
+                <h2 id="weighTitle">Caesar Salad · Romaine lettuce</h2>
+                <p>
+                  Connect the Salter scale, then add each ingredient. The panel turns
+                  <b style="color: var(--amber)">amber</b> while under,
+                  <b style="color: var(--green)">green</b> within tolerance, and
+                  <b style="color: var(--red)">coral</b> when over.
+                </p>
+
+                <div class="controls">
+                  <div class="field">
+                    <label for="targetInput">Target (g)</label>
+                    <input id="targetInput" type="number" min="0" step="1" value="180" inputmode="numeric" />
+                  </div>
+                  <div class="field">
+                    <label for="toleranceInput">Tolerance ± (g)</label>
+                    <input id="toleranceInput" type="number" min="0" step="1" value="10" inputmode="numeric" />
+                  </div>
+                </div>
+
+                <div class="actions">
+                  <button id="connectFiltered" class="primary">Connect Salter scale</button>
+                  <button id="tare" class="secondary" disabled>Tare / zero</button>
+                  <button id="connectAny" class="ghost">Advanced: any BLE device</button>
+                  <button id="disconnect" class="ghost" disabled>Disconnect</button>
+                </div>
+
+                <div id="state" class="state">Waiting for a scale connection.</div>
+
+                <div class="checks" aria-label="Browser diagnostic checks">
+                  <div class="check"><b>Secure page</b><span id="secureCheck">Checking…</span></div>
+                  <div class="check"><b>Web Bluetooth</b><span id="bluetoothCheck">Checking…</span></div>
+                  <div class="check"><b>Connection</b><span id="connectionCheck">Not connected</span></div>
+                  <div class="check"><b>Service FFE0</b><span id="serviceCheck">Waiting</span></div>
+                  <div class="check"><b>Notify FFE1</b><span id="notifyCheck">Waiting</span></div>
+                  <div class="check"><b>Tare write FFE3</b><span id="tareCheck">Waiting</span></div>
+                </div>
+
+                <div class="help">
+                  <p>
+                    If Bluetooth is blocked by "permissions policy", you are still inside a preview iframe. Copy the URL
+                    into a fresh Chrome or Edge tab on desktop or Android.
+                  </p>
+                </div>
+
+                <pre id="log" aria-label="Connection log"></pre>
+
+                <div class="checklist" aria-label="Recipe ingredient checklist">
+                  <h3>Ingredient checklist</h3>
+                  <div id="checklist"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -803,49 +1401,351 @@
       </section>
     </main>
 
-    <script>
-      const RECIPES = [
-        {
-          id: "caesar",
-          name: "Caesar Salad",
-          station: "Station · Cold Larder",
-          steps: [
-            { name: "Romaine lettuce", target: 180, tolerance: 10 },
-            { name: "Croutons", target: 40, tolerance: 3 },
-            { name: "Parmesan, grated", target: 30, tolerance: 2 },
-            { name: "Caesar dressing", target: 45, tolerance: 3 },
-            { name: "Anchovy fillets", target: 12, tolerance: 1 },
-            { name: "Cracked black pepper", target: 2, tolerance: 1 },
-          ],
-        },
-        {
-          id: "pancakes",
-          name: "Buttermilk Pancakes",
-          station: "Station · Hot Pass",
-          steps: [
-            { name: "Plain flour", target: 250, tolerance: 5 },
-            { name: "Caster sugar", target: 30, tolerance: 2 },
-            { name: "Baking powder", target: 10, tolerance: 1 },
-            { name: "Fine salt", target: 3, tolerance: 1 },
-            { name: "Buttermilk", target: 300, tolerance: 8 },
-            { name: "Melted butter", target: 50, tolerance: 3 },
-          ],
-        },
-        {
-          id: "vinaigrette",
-          name: "House Vinaigrette",
-          station: "Station · Sauces",
-          steps: [
-            { name: "Dijon mustard", target: 15, tolerance: 1 },
-            { name: "Red wine vinegar", target: 30, tolerance: 2 },
-            { name: "Honey", target: 10, tolerance: 1 },
-            { name: "Olive oil", target: 90, tolerance: 3 },
-            { name: "Fine salt", target: 2, tolerance: 1 },
-          ],
-        },
-      ];
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-      let currentRecipeIndex = 0;
+    <script>
+      /* ===========================
+         Storage: localStorage recipes
+         =========================== */
+      const STORAGE_KEY = "brigaid.recipes.v1";
+
+      const SEED_CAESAR = {
+        id: "seed-caesar",
+        name: "Caesar Salad",
+        station: "Cold Larder",
+        image: null,
+        steps: [
+          { name: "Romaine lettuce", target: 180, tolerance: 10 },
+          { name: "Croutons", target: 40, tolerance: 3 },
+          { name: "Parmesan, grated", target: 30, tolerance: 2 },
+          { name: "Caesar dressing", target: 45, tolerance: 3 },
+          { name: "Anchovy fillets", target: 12, tolerance: 1 },
+          { name: "Cracked black pepper", target: 2, tolerance: 1 },
+        ],
+        createdAt: Date.now(),
+      };
+
+      function loadRecipes() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (!raw) return [SEED_CAESAR];
+          const parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed) || parsed.length === 0) return [SEED_CAESAR];
+          return parsed;
+        } catch (e) {
+          console.warn("Failed to load recipes; seeding default.", e);
+          return [SEED_CAESAR];
+        }
+      }
+
+      function saveRecipes(recipes) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(recipes));
+        } catch (e) {
+          console.warn("Failed to save recipes", e);
+          toast("Could not save — storage full. Remove an image or a recipe.");
+        }
+      }
+
+      let recipes = loadRecipes();
+
+      function genId() {
+        return "r_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36).slice(-4);
+      }
+
+      /* ===========================
+         Tabs
+         =========================== */
+      const views = document.querySelectorAll("[data-view-panel]");
+      const tabs = document.querySelectorAll("nav.tabs button");
+
+      function setView(name) {
+        views.forEach((v) => v.classList.toggle("active", v.dataset.viewPanel === name));
+        tabs.forEach((b) => b.classList.toggle("active", b.dataset.view === name));
+        if (name === "library") renderLibrary();
+        if (name === "weigh") renderRecipeSelect();
+        if (name === "home") renderHomeStats();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      tabs.forEach((b) => b.addEventListener("click", () => setView(b.dataset.view)));
+      document.querySelectorAll("[data-go]").forEach((b) =>
+        b.addEventListener("click", () => setView(b.dataset.go)),
+      );
+
+      /* ===========================
+         Home stats
+         =========================== */
+      function renderHomeStats() {
+        document.getElementById("homeRecipeCount").textContent = recipes.length;
+        const ing = recipes.reduce((n, r) => n + (r.steps ? r.steps.length : 0), 0);
+        document.getElementById("homeIngCount").textContent = ing;
+      }
+
+      /* ===========================
+         Library
+         =========================== */
+      const libraryGrid = document.getElementById("libraryGrid");
+
+      function renderLibrary() {
+        if (!recipes.length) {
+          libraryGrid.innerHTML = `<div class="empty">No recipes yet. Tap <b>New recipe</b> to create one.</div>`;
+          return;
+        }
+        libraryGrid.innerHTML = recipes
+          .map((r) => {
+            const thumb = r.image
+              ? `<img src="${r.image}" alt="${escapeHTML(r.name)}" />`
+              : `<div>${escapeHTML(r.name)}</div>`;
+            const ingCount = r.steps ? r.steps.length : 0;
+            const totalG = r.steps ? r.steps.reduce((s, x) => s + (Number(x.target) || 0), 0) : 0;
+            const station = r.station ? escapeHTML(r.station) : "—";
+            return `<div class="recipe-tile" data-id="${r.id}">
+              <div class="thumb">${thumb}</div>
+              <div class="body">
+                <h4>${escapeHTML(r.name)}</h4>
+                <div class="meta">${ingCount} ingredients · ${totalG} g total · ${station}</div>
+              </div>
+              <div class="tile-actions">
+                <button class="primary" data-act="weigh">Weigh</button>
+                <button class="danger" data-act="delete">Delete</button>
+              </div>
+            </div>`;
+          })
+          .join("");
+
+        libraryGrid.querySelectorAll(".recipe-tile").forEach((tile) => {
+          const id = tile.dataset.id;
+          tile.querySelector('[data-act="weigh"]').addEventListener("click", () => {
+            currentRecipeId = id;
+            currentStepIndex = 0;
+            setView("weigh");
+          });
+          tile.querySelector('[data-act="delete"]').addEventListener("click", () => {
+            if (!confirm("Delete this recipe?")) return;
+            recipes = recipes.filter((r) => r.id !== id);
+            if (recipes.length === 0) recipes = [SEED_CAESAR];
+            saveRecipes(recipes);
+            renderLibrary();
+            renderHomeStats();
+            renderRecipeSelect();
+          });
+        });
+      }
+
+      function escapeHTML(s) {
+        return String(s).replace(/[&<>"']/g, (c) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        })[c]);
+      }
+
+      /* ===========================
+         New Recipe
+         =========================== */
+      const newNameEl = document.getElementById("newName");
+      const newStationEl = document.getElementById("newStation");
+      const newImageInput = document.getElementById("newImage");
+      const imageDropInner = document.getElementById("imageDropInner");
+      const clearImageBtn = document.getElementById("clearImage");
+      const ingredientsList = document.getElementById("ingredientsList");
+      const ingNameEl = document.getElementById("ingName");
+      const ingTargetEl = document.getElementById("ingTarget");
+      const ingTolEl = document.getElementById("ingTol");
+      const addIngredientBtn = document.getElementById("addIngredient");
+      const saveRecipeBtn = document.getElementById("saveRecipe");
+      const resetRecipeBtn = document.getElementById("resetRecipe");
+      const newRecipeState = document.getElementById("newRecipeState");
+
+      let draft = {
+        image: null,
+        steps: [],
+      };
+
+      function renderIngredients() {
+        if (!draft.steps.length) {
+          ingredientsList.innerHTML =
+            '<div class="empty" style="padding: 18px; font-size: 0.9rem">No ingredients yet. Add one below.</div>';
+          return;
+        }
+        ingredientsList.innerHTML = draft.steps
+          .map(
+            (s, i) => `<div class="ingredient-row" data-idx="${i}">
+              <div style="display: flex; align-items: center; gap: 10px">
+                <div class="order-badge">${i + 1}</div>
+                <input data-f="name" type="text" value="${escapeHTML(s.name)}" />
+              </div>
+              <input data-f="target" type="number" min="0" step="1" value="${s.target}" />
+              <input data-f="tolerance" type="number" min="0" step="1" value="${s.tolerance}" />
+              <button class="rm" type="button">Remove</button>
+            </div>`,
+          )
+          .join("");
+
+        ingredientsList.querySelectorAll(".ingredient-row").forEach((row) => {
+          const idx = Number(row.dataset.idx);
+          row.querySelectorAll("input").forEach((inp) => {
+            inp.addEventListener("input", () => {
+              const f = inp.dataset.f;
+              if (f === "name") draft.steps[idx].name = inp.value;
+              else draft.steps[idx][f] = Number(inp.value) || 0;
+            });
+          });
+          row.querySelector(".rm").addEventListener("click", () => {
+            draft.steps.splice(idx, 1);
+            renderIngredients();
+          });
+        });
+      }
+
+      addIngredientBtn.addEventListener("click", () => {
+        const name = ingNameEl.value.trim();
+        const target = Number(ingTargetEl.value);
+        const tol = Number(ingTolEl.value);
+        if (!name) {
+          ingNameEl.focus();
+          toast("Ingredient name required");
+          return;
+        }
+        if (!Number.isFinite(target) || target <= 0) {
+          ingTargetEl.focus();
+          toast("Target must be > 0");
+          return;
+        }
+        draft.steps.push({ name, target, tolerance: Math.max(0, tol) || 0 });
+        ingNameEl.value = "";
+        ingTargetEl.value = "";
+        ingTolEl.value = "2";
+        ingNameEl.focus();
+        renderIngredients();
+      });
+
+      /* Image upload with resize/compress */
+      newImageInput.addEventListener("change", async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        try {
+          const dataUrl = await resizeImage(file, 480, 0.78);
+          draft.image = dataUrl;
+          imageDropInner.innerHTML = `<img src="${dataUrl}" alt="preview" />`;
+          clearImageBtn.style.display = "inline-flex";
+        } catch (err) {
+          toast("Image failed to load");
+          console.warn(err);
+        }
+      });
+
+      clearImageBtn.addEventListener("click", () => {
+        draft.image = null;
+        newImageInput.value = "";
+        imageDropInner.innerHTML = `
+          <div style="font-weight: 800; color: var(--navy)">Tap to upload image</div>
+          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 4px">Auto-resized to 480px · JPEG</div>`;
+        clearImageBtn.style.display = "none";
+      });
+
+      function resizeImage(file, maxDim, quality) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            const img = new Image();
+            img.onload = () => {
+              let { width, height } = img;
+              if (width > height && width > maxDim) {
+                height = Math.round((height * maxDim) / width);
+                width = maxDim;
+              } else if (height > maxDim) {
+                width = Math.round((width * maxDim) / height);
+                height = maxDim;
+              }
+              const canvas = document.createElement("canvas");
+              canvas.width = width;
+              canvas.height = height;
+              const ctx = canvas.getContext("2d");
+              ctx.drawImage(img, 0, 0, width, height);
+              resolve(canvas.toDataURL("image/jpeg", quality));
+            };
+            img.onerror = reject;
+            img.src = reader.result;
+          };
+          reader.onerror = reject;
+          reader.readAsDataURL(file);
+        });
+      }
+
+      saveRecipeBtn.addEventListener("click", () => {
+        const name = newNameEl.value.trim();
+        if (!name) {
+          newNameEl.focus();
+          showNewState("Recipe needs a name.", "error");
+          return;
+        }
+        if (!draft.steps.length) {
+          showNewState("Add at least one ingredient.", "error");
+          return;
+        }
+        const recipe = {
+          id: genId(),
+          name,
+          station: newStationEl.value.trim() || "",
+          image: draft.image,
+          steps: draft.steps.map((s) => ({
+            name: String(s.name).trim(),
+            target: Number(s.target) || 0,
+            tolerance: Math.max(0, Number(s.tolerance) || 0),
+          })),
+          createdAt: Date.now(),
+        };
+        recipes = [recipe, ...recipes];
+        saveRecipes(recipes);
+        toast("Recipe saved");
+        resetDraft();
+        currentRecipeId = recipe.id;
+        currentStepIndex = 0;
+        renderHomeStats();
+        setView("library");
+      });
+
+      resetRecipeBtn.addEventListener("click", resetDraft);
+
+      function resetDraft() {
+        draft = { image: null, steps: [] };
+        newNameEl.value = "";
+        newStationEl.value = "";
+        newImageInput.value = "";
+        clearImageBtn.style.display = "none";
+        imageDropInner.innerHTML = `
+          <div style="font-weight: 800; color: var(--navy)">Tap to upload image</div>
+          <div style="font-size: 0.82rem; color: var(--muted); margin-top: 4px">Auto-resized to 480px · JPEG</div>`;
+        renderIngredients();
+        newRecipeState.style.display = "none";
+      }
+
+      function showNewState(msg, tone) {
+        newRecipeState.className = `state ${tone || ""}`;
+        newRecipeState.textContent = msg;
+        newRecipeState.style.display = "block";
+      }
+
+      /* ===========================
+         Toast
+         =========================== */
+      const toastEl = document.getElementById("toast");
+      let toastTimer = null;
+      function toast(msg) {
+        toastEl.textContent = msg;
+        toastEl.classList.add("show");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("show"), 1800);
+      }
+
+      /* ===========================
+         Weigh view (preserves original BLE + UI)
+         =========================== */
+      let currentRecipeId = recipes[0] ? recipes[0].id : null;
       let currentStepIndex = 0;
       let stepWithinTolerance = false;
 
@@ -917,6 +1817,15 @@
         return isNaN(v) || v < 0 ? 0 : v;
       }
 
+      function currentRecipe() {
+        return recipes.find((r) => r.id === currentRecipeId) || recipes[0];
+      }
+
+      function currentStep() {
+        const r = currentRecipe();
+        return r && r.steps ? r.steps[currentStepIndex] : null;
+      }
+
       function syncRecipeLabels() {
         const target = getTarget();
         const tol = getTolerance();
@@ -934,30 +1843,27 @@
         else updateNextGate();
       }
 
-      function currentRecipe() {
-        return RECIPES[currentRecipeIndex];
-      }
-
-      function currentStep() {
-        const r = currentRecipe();
-        return r ? r.steps[currentStepIndex] : null;
-      }
-
       function renderRecipeSelect() {
-        el.recipeSelect.innerHTML = RECIPES.map(
-          (r, i) => `<option value="${i}">${r.name}</option>`,
-        ).join("");
-        el.recipeSelect.value = String(currentRecipeIndex);
+        el.recipeSelect.innerHTML = recipes
+          .map((r) => `<option value="${r.id}">${escapeHTML(r.name)}</option>`)
+          .join("");
+        if (!recipes.find((r) => r.id === currentRecipeId)) {
+          currentRecipeId = recipes[0] ? recipes[0].id : null;
+          currentStepIndex = 0;
+        }
+        el.recipeSelect.value = currentRecipeId || "";
+        loadCurrentStep();
       }
 
       function renderChecklist() {
         const r = currentRecipe();
+        if (!r) return;
         el.checklist.innerHTML = r.steps
           .map((s, i) => {
             const cls = i === currentStepIndex ? "current" : i < currentStepIndex ? "done" : "";
             return `<div class="checklist-row ${cls}" data-step="${i}">
               <div class="ix">${i + 1}</div>
-              <div class="cl-name">${s.name}</div>
+              <div class="cl-name">${escapeHTML(s.name)}</div>
               <div class="cl-target">${s.target} g</div>
             </div>`;
           })
@@ -972,10 +1878,11 @@
 
       function loadCurrentStep() {
         const r = currentRecipe();
-        const s = currentStep();
-        if (!r || !s) return;
+        if (!r || !r.steps || !r.steps.length) return;
+        if (currentStepIndex >= r.steps.length) currentStepIndex = 0;
+        const s = r.steps[currentStepIndex];
         el.recipeName.textContent = r.name;
-        el.recipeEyebrow.textContent = r.station;
+        el.recipeEyebrow.textContent = r.station ? `Station · ${r.station}` : "brigaid recipe";
         el.recipeStep.textContent = `Step ${currentStepIndex + 1} of ${r.steps.length} · ${s.name}`;
         el.ingredientName.textContent = s.name;
         el.weighTitle.textContent = `${r.name} · ${s.name}`;
@@ -996,6 +1903,7 @@
 
       function updateNextGate() {
         const r = currentRecipe();
+        if (!r) return;
         const atEnd = currentStepIndex >= r.steps.length - 1;
         el.prevStep.disabled = currentStepIndex === 0;
         el.nextStep.disabled = atEnd;
@@ -1191,12 +2099,9 @@
       el.toleranceInput.addEventListener("input", syncRecipeLabels);
 
       el.recipeSelect.addEventListener("change", (e) => {
-        const idx = parseInt(e.target.value, 10);
-        if (!isNaN(idx)) {
-          currentRecipeIndex = idx;
-          currentStepIndex = 0;
-          loadCurrentStep();
-        }
+        currentRecipeId = e.target.value;
+        currentStepIndex = 0;
+        loadCurrentStep();
       });
 
       el.prevStep.addEventListener("click", () => {
@@ -1205,13 +2110,16 @@
 
       el.nextStep.addEventListener("click", () => {
         const r = currentRecipe();
+        if (!r) return;
         if (currentStepIndex < r.steps.length - 1) goToStep(currentStepIndex + 1);
       });
 
+      /* Boot */
+      renderHomeStats();
+      renderIngredients();
       renderRecipeSelect();
-      loadCurrentStep();
       updateDiagnostics();
-      log("Brigaid standalone Bluetooth test loaded.");
+      log("Brigaid standalone app loaded.");
     </script>
   </body>
 </html>
