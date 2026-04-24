@@ -3,31 +3,40 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#5d13ad" />
-    <title>brigaid. Salter Bluetooth Test</title>
+    <meta name="theme-color" content="#1a2340" />
+    <title>brigaid. Salter Weighing Test</title>
     <style>
       :root {
         color-scheme: light;
-        --purple: #5d13ad;
-        --purple-dark: #190d27;
-        --yellow: #f6cb16;
-        --ink: #201729;
-        --muted: #6f6876;
-        --line: #e8e2ef;
+        --navy: #1a2340;
+        --navy-soft: #2a3557;
+        --coral: #ef6a5a;
+        --coral-soft: #f59488;
+        --cream: #fbf4ec;
+        --blush: #f4d9cf;
+        --ink: #1a2340;
+        --muted: #74708a;
+        --line: #ece4dc;
         --panel: #ffffff;
-        --soft: #f8f5fb;
-        --green: #13a66b;
-        --orange: #f0a000;
-        --red: #c93645;
+        --amber: #f2a93b;
+        --amber-bg: #fde7bf;
+        --green: #3ea676;
+        --green-bg: #d7f1e2;
+        --red: #e0493a;
+        --red-bg: #fbd7d1;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      html,
       body {
         margin: 0;
         min-height: 100vh;
+      }
+
+      body {
         font-family:
           ui-sans-serif,
           system-ui,
@@ -37,15 +46,15 @@
           sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at 96% 0%, rgba(246, 203, 22, 0.22), transparent 22rem),
-          radial-gradient(circle at 0% 100%, rgba(93, 19, 173, 0.14), transparent 22rem),
-          #fff;
+          radial-gradient(circle at 90% -10%, rgba(239, 106, 90, 0.22), transparent 28rem),
+          radial-gradient(circle at -10% 110%, rgba(26, 35, 64, 0.12), transparent 26rem),
+          var(--cream);
       }
 
       main {
-        width: min(1120px, calc(100% - 32px));
+        width: min(1180px, calc(100% - 32px));
         margin: 0 auto;
-        padding: 28px 0 40px;
+        padding: 26px 0 48px;
       }
 
       header {
@@ -65,30 +74,31 @@
       .mark {
         display: grid;
         place-items: center;
-        width: 48px;
-        height: 48px;
-        border-radius: 10px;
-        background: var(--purple);
-        color: white;
+        width: 46px;
+        height: 46px;
+        border-radius: 12px;
+        background: var(--navy);
+        color: var(--cream);
         font-weight: 800;
-        letter-spacing: -0.05em;
+        letter-spacing: -0.06em;
+        font-size: 1.25rem;
       }
 
       .dot {
-        color: var(--yellow);
+        color: var(--coral);
       }
 
       h1 {
         margin: 0;
-        font-size: clamp(1.45rem, 1rem + 1.6vw, 2.1rem);
+        font-size: clamp(1.4rem, 1rem + 1.4vw, 1.9rem);
         line-height: 1.05;
         letter-spacing: -0.04em;
       }
 
       .tagline {
         margin: 4px 0 0;
-        font-size: 0.72rem;
-        letter-spacing: 0.32em;
+        font-size: 0.68rem;
+        letter-spacing: 0.3em;
         text-transform: uppercase;
         color: var(--muted);
       }
@@ -97,140 +107,366 @@
         display: inline-flex;
         align-items: center;
         border-radius: 999px;
-        padding: 7px 11px;
-        background: var(--yellow);
-        color: var(--purple-dark);
-        font-size: 0.8rem;
-        font-weight: 800;
+        padding: 7px 13px;
+        background: var(--navy);
+        color: var(--cream);
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
       }
 
       .grid {
         display: grid;
-        grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-        gap: 18px;
+        grid-template-columns: minmax(320px, 380px) minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
       }
 
       .card {
         border: 1px solid var(--line);
-        border-radius: 18px;
-        background: rgba(255, 255, 255, 0.9);
-        box-shadow: 0 18px 50px rgba(49, 19, 81, 0.08);
+        border-radius: 20px;
+        background: var(--panel);
+        box-shadow: 0 18px 44px rgba(26, 35, 64, 0.08);
       }
 
       .card-inner {
-        padding: clamp(18px, 3vw, 28px);
+        padding: clamp(18px, 2.6vw, 26px);
       }
 
       h2 {
         margin: 0 0 10px;
-        font-size: 1.22rem;
-        letter-spacing: -0.025em;
+        font-size: 1.15rem;
+        letter-spacing: -0.02em;
+      }
+
+      h3 {
+        margin: 0 0 8px;
+        font-size: 0.78rem;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
       }
 
       p {
-        margin: 0 0 14px;
+        margin: 0 0 12px;
         color: var(--muted);
-        line-height: 1.55;
+        line-height: 1.5;
+      }
+
+      .phone {
+        position: relative;
+        width: 100%;
+        max-width: 380px;
+        margin: 0 auto;
+        background: var(--navy);
+        border-radius: 38px;
+        padding: 14px;
+        box-shadow: 0 30px 60px rgba(26, 35, 64, 0.28);
+      }
+
+      .phone::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110px;
+        height: 22px;
+        background: #0d1429;
+        border-radius: 14px;
+        z-index: 2;
+      }
+
+      .phone-screen {
+        position: relative;
+        background: var(--cream);
+        border-radius: 28px;
+        overflow: hidden;
+        padding: 48px 18px 22px;
+      }
+
+      .phone-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+        color: var(--navy);
+      }
+
+      .phone-top small {
+        font-weight: 800;
+        font-size: 0.8rem;
+      }
+
+      .recipe-card {
+        background: var(--navy);
+        color: var(--cream);
+        border-radius: 18px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+      }
+
+      .recipe-card .eyebrow {
+        font-size: 0.66rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--coral-soft);
+        font-weight: 700;
+      }
+
+      .recipe-card h4 {
+        margin: 4px 0 2px;
+        font-size: 1.15rem;
+        letter-spacing: -0.02em;
+      }
+
+      .recipe-card .step {
+        font-size: 0.82rem;
+        opacity: 0.82;
+      }
+
+      .ingredient {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: var(--blush);
+        border-radius: 14px;
+        padding: 12px 14px;
+        margin-bottom: 14px;
+      }
+
+      .ingredient .name {
+        font-weight: 800;
+        color: var(--navy);
+      }
+
+      .ingredient .target {
+        font-weight: 800;
+        color: var(--coral);
+      }
+
+      .weigh-panel {
+        border-radius: 20px;
+        padding: 22px 16px;
+        text-align: center;
+        background: var(--cream);
+        border: 2px solid var(--line);
+        transition:
+          background-color 260ms ease,
+          border-color 260ms ease,
+          box-shadow 260ms ease,
+          transform 260ms ease;
+      }
+
+      .weigh-panel .reading {
+        font-size: clamp(2.8rem, 9vw, 4.2rem);
+        font-weight: 800;
+        letter-spacing: -0.06em;
+        line-height: 1;
+        color: var(--navy);
+      }
+
+      .weigh-panel .reading small {
+        font-size: 0.3em;
+        margin-left: 6px;
+        color: var(--muted);
+        font-weight: 700;
+      }
+
+      .weigh-panel .status-text {
+        margin-top: 8px;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        font-size: 0.92rem;
+        text-transform: uppercase;
+      }
+
+      .weigh-panel .delta {
+        margin-top: 4px;
+        font-weight: 600;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+
+      .weigh-panel.idle {
+        background: var(--cream);
+        border-color: var(--line);
+      }
+
+      .weigh-panel.under {
+        background: var(--amber-bg);
+        border-color: var(--amber);
+        color: #6b4500;
+      }
+      .weigh-panel.under .reading {
+        color: #6b4500;
+      }
+
+      .weigh-panel.ok {
+        background: var(--green-bg);
+        border-color: var(--green);
+        color: #124a2e;
+        animation: pulse-green 900ms ease-out;
+      }
+      .weigh-panel.ok .reading {
+        color: #124a2e;
+      }
+
+      .weigh-panel.over {
+        background: var(--red-bg);
+        border-color: var(--red);
+        color: #6b1a14;
+        animation: pulse-red 700ms ease-in-out infinite alternate;
+      }
+      .weigh-panel.over .reading {
+        color: #6b1a14;
+      }
+
+      .weigh-panel.flash {
+        transform: scale(1.012);
+      }
+
+      @keyframes pulse-green {
+        0% {
+          box-shadow: 0 0 0 0 rgba(62, 166, 118, 0.6);
+        }
+        100% {
+          box-shadow: 0 0 0 22px rgba(62, 166, 118, 0);
+        }
+      }
+
+      @keyframes pulse-red {
+        from {
+          box-shadow: 0 0 0 0 rgba(224, 73, 58, 0.45);
+        }
+        to {
+          box-shadow: 0 0 0 14px rgba(224, 73, 58, 0);
+        }
+      }
+
+      .controls {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 14px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .field label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .field input {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        font-weight: 700;
+        color: var(--ink);
+        background: var(--cream);
+        min-height: 44px;
+      }
+
+      .field input:focus {
+        outline: 2px solid var(--coral);
+        outline-offset: 2px;
       }
 
       .actions {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 18px;
       }
 
       button {
-        min-height: 44px;
+        min-height: 46px;
         border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 0 15px;
-        background: white;
+        border-radius: 14px;
+        padding: 0 16px;
+        background: var(--cream);
         color: var(--ink);
         font: inherit;
         font-weight: 800;
         cursor: pointer;
+        transition:
+          transform 120ms ease,
+          background-color 160ms ease;
+      }
+
+      button:hover:not(:disabled) {
+        transform: translateY(-1px);
       }
 
       button.primary {
-        border-color: var(--purple);
-        background: var(--purple);
+        border-color: var(--coral);
+        background: var(--coral);
         color: white;
+      }
+
+      button.secondary {
+        border-color: var(--navy);
+        background: var(--navy);
+        color: var(--cream);
       }
 
       button:disabled {
         cursor: not-allowed;
         opacity: 0.5;
-      }
-
-      .status {
-        display: grid;
-        gap: 14px;
-      }
-
-      .reading {
-        display: grid;
-        place-items: center;
-        min-height: 220px;
-        border-radius: 16px;
-        background: var(--soft);
-        border: 1px solid var(--line);
-        text-align: center;
-      }
-
-      .reading strong {
-        display: block;
-        font-size: clamp(3rem, 8vw, 5.5rem);
-        line-height: 1;
-        letter-spacing: -0.08em;
-      }
-
-      .reading span {
-        display: block;
-        margin-top: 8px;
-        color: var(--muted);
-        font-weight: 700;
+        transform: none;
       }
 
       .state {
         border-radius: 14px;
-        padding: 16px;
-        background: var(--soft);
+        padding: 14px 16px;
+        background: var(--cream);
         border: 1px solid var(--line);
-        font-weight: 800;
+        font-weight: 700;
+        font-size: 0.92rem;
+        margin-top: 16px;
       }
 
       .state.ok {
-        background: color-mix(in srgb, var(--green) 14%, white);
-        border-color: color-mix(in srgb, var(--green) 35%, white);
-        color: #064a2f;
+        background: var(--green-bg);
+        border-color: var(--green);
+        color: #124a2e;
       }
 
       .state.warn {
-        background: color-mix(in srgb, var(--orange) 18%, white);
-        border-color: color-mix(in srgb, var(--orange) 38%, white);
-        color: #653d00;
+        background: var(--amber-bg);
+        border-color: var(--amber);
+        color: #6b4500;
       }
 
       .state.error {
-        background: color-mix(in srgb, var(--red) 14%, white);
-        border-color: color-mix(in srgb, var(--red) 35%, white);
-        color: #66111c;
+        background: var(--red-bg);
+        border-color: var(--red);
+        color: #6b1a14;
       }
 
       .checks {
         display: grid;
-        gap: 8px;
-        margin-top: 18px;
+        gap: 6px;
+        margin-top: 14px;
       }
 
       .check {
         display: flex;
         justify-content: space-between;
         gap: 16px;
-        padding: 10px 0;
+        padding: 8px 0;
         border-bottom: 1px solid var(--line);
-        font-size: 0.92rem;
+        font-size: 0.88rem;
       }
 
       .check:last-child {
@@ -248,31 +484,61 @@
 
       pre {
         overflow: auto;
-        max-height: 320px;
-        margin: 0;
-        padding: 16px;
+        max-height: 240px;
+        margin: 14px 0 0;
+        padding: 14px;
         border-radius: 14px;
-        background: #140b1f;
-        color: #f7f1ff;
-        font-size: 0.82rem;
+        background: var(--navy);
+        color: #eadcd1;
+        font-size: 0.78rem;
         line-height: 1.5;
         white-space: pre-wrap;
       }
 
       .help {
-        margin-top: 18px;
-        padding: 16px;
+        margin-top: 14px;
+        padding: 14px;
         border-radius: 14px;
-        background: rgba(246, 203, 22, 0.18);
-        border: 1px solid rgba(246, 203, 22, 0.48);
+        background: var(--blush);
+        border: 1px solid var(--coral-soft);
       }
 
       .help p {
         margin: 0;
-        color: var(--ink);
+        color: var(--navy);
+        font-size: 0.88rem;
       }
 
-      @media (max-width: 860px) {
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-top: 14px;
+      }
+
+      .tile {
+        border-radius: 14px;
+        padding: 12px 14px;
+        background: var(--cream);
+        border: 1px solid var(--line);
+      }
+
+      .tile .label {
+        font-size: 0.66rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 800;
+      }
+
+      .tile .value {
+        font-size: 1.3rem;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--navy);
+      }
+
+      @media (max-width: 880px) {
         header {
           align-items: flex-start;
           flex-direction: column;
@@ -280,6 +546,10 @@
 
         .grid {
           grid-template-columns: 1fr;
+        }
+
+        .phone {
+          max-width: 360px;
         }
       }
     </style>
@@ -294,55 +564,106 @@
             <p class="tagline">complete kitchen optimisation</p>
           </div>
         </div>
-        <span class="badge">Salter Bluetooth test</span>
+        <span class="badge">Salter weighing test</span>
       </header>
 
       <section class="grid">
-        <div class="card">
-          <div class="card-inner">
-            <h2>Connect directly to the Salter scale</h2>
-            <p>
-              This standalone page avoids the Perplexity preview iframe and tests the Salter BLE connection directly in your
-              browser. Use Chrome or Edge on a laptop, desktop, or Android device.
-            </p>
-            <p>
-              Turn the scale on, make sure it is not connected to another phone/app, then press the connect button below.
-            </p>
-
-            <div class="actions">
-              <button id="connectFiltered" class="primary">Connect Salter scale</button>
-              <button id="connectAny">Advanced: choose any BLE device</button>
-              <button id="tare" disabled>Tare / zero</button>
-              <button id="disconnect" disabled>Disconnect</button>
+        <!-- Left: iPhone-style app preview -->
+        <div class="phone" aria-label="Brigaid app preview">
+          <div class="phone-screen">
+            <div class="phone-top">
+              <small>9:41</small>
+              <small>brigaid<span class="dot">.</span></small>
             </div>
 
-            <div class="checks" aria-label="Browser diagnostic checks">
-              <div class="check"><b>Secure page</b><span id="secureCheck">Checking...</span></div>
-              <div class="check"><b>Web Bluetooth available</b><span id="bluetoothCheck">Checking...</span></div>
-              <div class="check"><b>Connection</b><span id="connectionCheck">Not connected</span></div>
-              <div class="check"><b>Salter service FFE0</b><span id="serviceCheck">Waiting</span></div>
-              <div class="check"><b>Weight notify FFE1</b><span id="notifyCheck">Waiting</span></div>
-              <div class="check"><b>Tare write FFE3</b><span id="tareCheck">Waiting</span></div>
+            <div class="recipe-card">
+              <div class="eyebrow">Station · Cold Larder</div>
+              <h4 id="recipeName">Caesar Salad</h4>
+              <div class="step" id="recipeStep">Step 3 of 6 · Add Parmesan</div>
             </div>
 
-            <div class="help">
-              <p>
-                If you still see “permissions policy” here, the page is still being opened inside another app or preview.
-                Copy the URL and paste it into Chrome or Edge as a normal browser tab.
-              </p>
+            <div class="ingredient">
+              <div>
+                <div class="name" id="ingredientName">Parmesan, grated</div>
+                <div style="font-size: 0.78rem; color: var(--muted); font-weight: 600">
+                  Tolerance <span id="toleranceLabel">±2</span> g
+                </div>
+              </div>
+              <div class="target"><span id="targetLabel">30</span> g</div>
+            </div>
+
+            <div id="panel" class="weigh-panel idle" aria-live="polite">
+              <div class="reading">
+                <span id="weight">0</span><small id="unit">g</small>
+              </div>
+              <div class="status-text" id="statusText">Place ingredient</div>
+              <div class="delta" id="deltaText">Awaiting scale…</div>
+            </div>
+
+            <div class="split">
+              <div class="tile">
+                <div class="label">Target</div>
+                <div class="value"><span id="targetTile">30</span> g</div>
+              </div>
+              <div class="tile">
+                <div class="label">Difference</div>
+                <div class="value" id="diffTile">—</div>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="status">
-          <div class="reading" aria-live="polite">
-            <div>
-              <strong id="weight">0.0</strong>
-              <span id="unit">g</span>
+        <!-- Right: connection + controls -->
+        <div>
+          <div class="card">
+            <div class="card-inner">
+              <h3>Weighing test</h3>
+              <h2>Caesar Salad · Parmesan</h2>
+              <p>
+                Set a target weight and tolerance, connect the Salter scale, then add the ingredient. The panel turns
+                <b style="color: var(--amber)">amber</b> while under, <b style="color: var(--green)">green</b> within
+                tolerance, and <b style="color: var(--red)">coral</b> when over.
+              </p>
+
+              <div class="controls">
+                <div class="field">
+                  <label for="targetInput">Target (g)</label>
+                  <input id="targetInput" type="number" min="0" step="1" value="30" inputmode="numeric" />
+                </div>
+                <div class="field">
+                  <label for="toleranceInput">Tolerance ± (g)</label>
+                  <input id="toleranceInput" type="number" min="0" step="1" value="2" inputmode="numeric" />
+                </div>
+              </div>
+
+              <div class="actions">
+                <button id="connectFiltered" class="primary">Connect Salter scale</button>
+                <button id="tare" class="secondary" disabled>Tare / zero</button>
+                <button id="connectAny">Advanced: any BLE device</button>
+                <button id="disconnect" disabled>Disconnect</button>
+              </div>
+
+              <div id="state" class="state">Waiting for a scale connection.</div>
+
+              <div class="checks" aria-label="Browser diagnostic checks">
+                <div class="check"><b>Secure page</b><span id="secureCheck">Checking…</span></div>
+                <div class="check"><b>Web Bluetooth</b><span id="bluetoothCheck">Checking…</span></div>
+                <div class="check"><b>Connection</b><span id="connectionCheck">Not connected</span></div>
+                <div class="check"><b>Service FFE0</b><span id="serviceCheck">Waiting</span></div>
+                <div class="check"><b>Notify FFE1</b><span id="notifyCheck">Waiting</span></div>
+                <div class="check"><b>Tare write FFE3</b><span id="tareCheck">Waiting</span></div>
+              </div>
+
+              <div class="help">
+                <p>
+                  If Bluetooth is blocked by "permissions policy", you are still inside a preview iframe. Copy the URL
+                  into a fresh Chrome or Edge tab on desktop or Android.
+                </p>
+              </div>
+
+              <pre id="log" aria-label="Connection log"></pre>
             </div>
           </div>
-          <div id="state" class="state">Waiting for a scale connection.</div>
-          <pre id="log" aria-label="Connection log"></pre>
         </div>
       </section>
     </main>
@@ -358,6 +679,8 @@
       let service = null;
       let tareCharacteristic = null;
       let weightCharacteristic = null;
+      let lastValue = null;
+      let lastUnit = "g";
 
       const el = {
         connectFiltered: document.getElementById("connectFiltered"),
@@ -374,6 +697,15 @@
         serviceCheck: document.getElementById("serviceCheck"),
         notifyCheck: document.getElementById("notifyCheck"),
         tareCheck: document.getElementById("tareCheck"),
+        panel: document.getElementById("panel"),
+        statusText: document.getElementById("statusText"),
+        deltaText: document.getElementById("deltaText"),
+        targetInput: document.getElementById("targetInput"),
+        toleranceInput: document.getElementById("toleranceInput"),
+        targetLabel: document.getElementById("targetLabel"),
+        toleranceLabel: document.getElementById("toleranceLabel"),
+        targetTile: document.getElementById("targetTile"),
+        diffTile: document.getElementById("diffTile"),
       };
 
       function log(message) {
@@ -384,6 +716,71 @@
       function setState(message, tone = "") {
         el.state.textContent = message;
         el.state.className = `state ${tone}`;
+      }
+
+      function getTarget() {
+        const v = parseFloat(el.targetInput.value);
+        return isNaN(v) ? 0 : v;
+      }
+
+      function getTolerance() {
+        const v = parseFloat(el.toleranceInput.value);
+        return isNaN(v) || v < 0 ? 0 : v;
+      }
+
+      function syncRecipeLabels() {
+        const target = getTarget();
+        const tol = getTolerance();
+        el.targetLabel.textContent = target;
+        el.toleranceLabel.textContent = `±${tol}`;
+        el.targetTile.textContent = target;
+        if (lastValue !== null) updatePanel(lastValue, lastUnit);
+      }
+
+      function flashPanel() {
+        el.panel.classList.add("flash");
+        setTimeout(() => el.panel.classList.remove("flash"), 160);
+      }
+
+      function updatePanel(value, unit) {
+        lastValue = value;
+        lastUnit = unit;
+        const target = getTarget();
+        const tol = getTolerance();
+        const diff = value - target;
+        const absDiff = Math.abs(diff);
+
+        el.diffTile.textContent = `${diff >= 0 ? "+" : ""}${diff.toFixed(unit === "g" || unit === "ml" ? 0 : 1)} ${unit}`;
+
+        el.panel.classList.remove("idle", "under", "ok", "over");
+
+        if (unit !== "g" && unit !== "ml") {
+          el.panel.classList.add("idle");
+          el.statusText.textContent = "Switch scale to grams";
+          el.deltaText.textContent = `Reading in ${unit}`;
+          flashPanel();
+          return;
+        }
+
+        if (target <= 0) {
+          el.panel.classList.add("idle");
+          el.statusText.textContent = "Set a target";
+          el.deltaText.textContent = `Live reading ${value.toFixed(0)} ${unit}`;
+        } else if (absDiff <= tol) {
+          el.panel.classList.add("ok");
+          el.statusText.textContent = "Perfect — within tolerance";
+          el.deltaText.textContent = `${diff >= 0 ? "+" : ""}${diff.toFixed(0)} ${unit} from target`;
+        } else if (diff < 0) {
+          el.panel.classList.add("under");
+          el.statusText.textContent = "Keep adding";
+          el.deltaText.textContent = `${absDiff.toFixed(0)} ${unit} under target`;
+        } else {
+          el.panel.classList.add("over");
+          el.statusText.textContent = "Too much — remove some";
+          el.deltaText.textContent = `${absDiff.toFixed(0)} ${unit} over target`;
+        }
+
+        flashPanel();
       }
 
       function updateDiagnostics() {
@@ -421,10 +818,12 @@
           unit = "fl oz";
         }
 
-        el.weight.textContent = value.toFixed(unit === "g" || unit === "ml" ? 0 : 1);
+        const display = value.toFixed(unit === "g" || unit === "ml" ? 0 : 1);
+        el.weight.textContent = display;
         el.unit.textContent = unit;
-        setState(`Receiving Salter readings: ${el.weight.textContent} ${unit}`, "ok");
-        log(`Reading ${el.weight.textContent} ${unit} · packet ${bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")}`);
+        setState(`Live reading ${display} ${unit}`, "ok");
+        updatePanel(value, unit);
+        log(`Reading ${display} ${unit} · packet ${bytes.map((b) => b.toString(16).padStart(2, "0")).join(" ")}`);
       }
 
       async function connect(options) {
@@ -432,7 +831,7 @@
         if (!("bluetooth" in navigator)) return;
 
         try {
-          setState("Opening Bluetooth chooser...");
+          setState("Opening Bluetooth chooser…");
           log("Requesting Bluetooth device.");
           device = await navigator.bluetooth.requestDevice(options);
           el.connectionCheck.textContent = `Selected ${device.name || "unnamed device"}`;
@@ -474,7 +873,7 @@
           }
 
           el.disconnect.disabled = false;
-          setState("Connected. Waiting for weight readings from the scale.", "ok");
+          setState("Connected. Place the ingredient on the scale.", "ok");
         } catch (error) {
           const message = error && error.message ? error.message : String(error);
           log(`Connection failed: ${error.name || "Error"} · ${message}`);
@@ -515,6 +914,10 @@
         }
       });
 
+      el.targetInput.addEventListener("input", syncRecipeLabels);
+      el.toleranceInput.addEventListener("input", syncRecipeLabels);
+
+      syncRecipeLabels();
       updateDiagnostics();
       log("Brigaid standalone Bluetooth test loaded.");
     </script>
