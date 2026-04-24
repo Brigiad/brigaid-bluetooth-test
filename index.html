@@ -516,6 +516,126 @@
         margin-top: 14px;
       }
 
+      .step-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 14px;
+      }
+
+      .step-nav button {
+        min-height: 44px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+      }
+
+      .step-nav button.next-ready {
+        border-color: var(--green);
+        background: var(--green);
+        color: white;
+        animation: pulse-green 1.2s ease-out infinite;
+      }
+
+      .recipe-select {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+
+      .recipe-select label {
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .recipe-select select {
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 12px 14px;
+        font: inherit;
+        font-weight: 700;
+        color: var(--ink);
+        background: var(--cream);
+        min-height: 44px;
+        cursor: pointer;
+      }
+
+      .checklist {
+        margin-top: 16px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--cream);
+        padding: 10px 12px;
+      }
+
+      .checklist h3 {
+        margin: 4px 2px 8px;
+      }
+
+      .checklist-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 6px;
+        border-bottom: 1px dashed var(--line);
+        font-size: 0.88rem;
+      }
+
+      .checklist-row:last-child {
+        border-bottom: 0;
+      }
+
+      .checklist-row .ix {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--panel);
+        border: 1px solid var(--line);
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: var(--muted);
+        flex-shrink: 0;
+      }
+
+      .checklist-row.done .ix {
+        background: var(--green);
+        border-color: var(--green);
+        color: white;
+      }
+
+      .checklist-row.current {
+        background: var(--blush);
+        border-radius: 10px;
+      }
+
+      .checklist-row.current .ix {
+        background: var(--coral);
+        border-color: var(--coral);
+        color: white;
+      }
+
+      .checklist-row .cl-name {
+        flex: 1;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .checklist-row.done .cl-name {
+        text-decoration: line-through;
+        color: var(--muted);
+      }
+
+      .checklist-row .cl-target {
+        font-weight: 800;
+        color: var(--coral);
+        font-size: 0.82rem;
+      }
+
       .tile {
         border-radius: 14px;
         padding: 12px 14px;
@@ -577,9 +697,9 @@
             </div>
 
             <div class="recipe-card">
-              <div class="eyebrow">Station · Cold Larder</div>
+              <div class="eyebrow" id="recipeEyebrow">Station · Cold Larder</div>
               <h4 id="recipeName">Caesar Salad</h4>
-              <div class="step" id="recipeStep">Step 3 of 6 · Add Parmesan</div>
+              <div class="step" id="recipeStep">Step 1 of 6 · Romaine lettuce</div>
             </div>
 
             <div class="ingredient">
@@ -610,6 +730,11 @@
                 <div class="value" id="diffTile">—</div>
               </div>
             </div>
+
+            <div class="step-nav">
+              <button id="prevStep" type="button">← Previous</button>
+              <button id="nextStep" type="button">Next →</button>
+            </div>
           </div>
         </div>
 
@@ -617,8 +742,13 @@
         <div>
           <div class="card">
             <div class="card-inner">
+              <div class="recipe-select">
+                <label for="recipeSelect">Recipe</label>
+                <select id="recipeSelect"></select>
+              </div>
+
               <h3>Weighing test</h3>
-              <h2>Caesar Salad · Parmesan</h2>
+              <h2 id="weighTitle">Caesar Salad · Romaine lettuce</h2>
               <p>
                 Set a target weight and tolerance, connect the Salter scale, then add the ingredient. The panel turns
                 <b style="color: var(--amber)">amber</b> while under, <b style="color: var(--green)">green</b> within
@@ -662,6 +792,11 @@
               </div>
 
               <pre id="log" aria-label="Connection log"></pre>
+
+              <div class="checklist" aria-label="Recipe ingredient checklist">
+                <h3>Ingredient checklist</h3>
+                <div id="checklist"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -669,6 +804,51 @@
     </main>
 
     <script>
+      const RECIPES = [
+        {
+          id: "caesar",
+          name: "Caesar Salad",
+          station: "Station · Cold Larder",
+          steps: [
+            { name: "Romaine lettuce", target: 180, tolerance: 10 },
+            { name: "Croutons", target: 40, tolerance: 3 },
+            { name: "Parmesan, grated", target: 30, tolerance: 2 },
+            { name: "Caesar dressing", target: 45, tolerance: 3 },
+            { name: "Anchovy fillets", target: 12, tolerance: 1 },
+            { name: "Cracked black pepper", target: 2, tolerance: 1 },
+          ],
+        },
+        {
+          id: "pancakes",
+          name: "Buttermilk Pancakes",
+          station: "Station · Hot Pass",
+          steps: [
+            { name: "Plain flour", target: 250, tolerance: 5 },
+            { name: "Caster sugar", target: 30, tolerance: 2 },
+            { name: "Baking powder", target: 10, tolerance: 1 },
+            { name: "Fine salt", target: 3, tolerance: 1 },
+            { name: "Buttermilk", target: 300, tolerance: 8 },
+            { name: "Melted butter", target: 50, tolerance: 3 },
+          ],
+        },
+        {
+          id: "vinaigrette",
+          name: "House Vinaigrette",
+          station: "Station · Sauces",
+          steps: [
+            { name: "Dijon mustard", target: 15, tolerance: 1 },
+            { name: "Red wine vinegar", target: 30, tolerance: 2 },
+            { name: "Honey", target: 10, tolerance: 1 },
+            { name: "Olive oil", target: 90, tolerance: 3 },
+            { name: "Fine salt", target: 2, tolerance: 1 },
+          ],
+        },
+      ];
+
+      let currentRecipeIndex = 0;
+      let currentStepIndex = 0;
+      let stepWithinTolerance = false;
+
       const SALTER_SERVICE = "0000ffe0-0000-1000-8000-00805f9b34fb";
       const WEIGHT_CHARACTERISTIC = "0000ffe1-0000-1000-8000-00805f9b34fb";
       const TARE_CHARACTERISTIC = "0000ffe3-0000-1000-8000-00805f9b34fb";
@@ -706,6 +886,15 @@
         toleranceLabel: document.getElementById("toleranceLabel"),
         targetTile: document.getElementById("targetTile"),
         diffTile: document.getElementById("diffTile"),
+        recipeSelect: document.getElementById("recipeSelect"),
+        recipeName: document.getElementById("recipeName"),
+        recipeStep: document.getElementById("recipeStep"),
+        recipeEyebrow: document.getElementById("recipeEyebrow"),
+        ingredientName: document.getElementById("ingredientName"),
+        weighTitle: document.getElementById("weighTitle"),
+        prevStep: document.getElementById("prevStep"),
+        nextStep: document.getElementById("nextStep"),
+        checklist: document.getElementById("checklist"),
       };
 
       function log(message) {
@@ -734,7 +923,84 @@
         el.targetLabel.textContent = target;
         el.toleranceLabel.textContent = `±${tol}`;
         el.targetTile.textContent = target;
+        const step = currentStep();
+        if (step) {
+          step.target = target;
+          step.tolerance = tol;
+          const row = el.checklist.querySelector(`[data-step="${currentStepIndex}"] .cl-target`);
+          if (row) row.textContent = `${target} g`;
+        }
         if (lastValue !== null) updatePanel(lastValue, lastUnit);
+        else updateNextGate();
+      }
+
+      function currentRecipe() {
+        return RECIPES[currentRecipeIndex];
+      }
+
+      function currentStep() {
+        const r = currentRecipe();
+        return r ? r.steps[currentStepIndex] : null;
+      }
+
+      function renderRecipeSelect() {
+        el.recipeSelect.innerHTML = RECIPES.map(
+          (r, i) => `<option value="${i}">${r.name}</option>`,
+        ).join("");
+        el.recipeSelect.value = String(currentRecipeIndex);
+      }
+
+      function renderChecklist() {
+        const r = currentRecipe();
+        el.checklist.innerHTML = r.steps
+          .map((s, i) => {
+            const cls = i === currentStepIndex ? "current" : i < currentStepIndex ? "done" : "";
+            return `<div class="checklist-row ${cls}" data-step="${i}">
+              <div class="ix">${i + 1}</div>
+              <div class="cl-name">${s.name}</div>
+              <div class="cl-target">${s.target} g</div>
+            </div>`;
+          })
+          .join("");
+        el.checklist.querySelectorAll(".checklist-row").forEach((row) => {
+          row.addEventListener("click", () => {
+            const idx = parseInt(row.dataset.step, 10);
+            if (!isNaN(idx)) goToStep(idx);
+          });
+        });
+      }
+
+      function loadCurrentStep() {
+        const r = currentRecipe();
+        const s = currentStep();
+        if (!r || !s) return;
+        el.recipeName.textContent = r.name;
+        el.recipeEyebrow.textContent = r.station;
+        el.recipeStep.textContent = `Step ${currentStepIndex + 1} of ${r.steps.length} · ${s.name}`;
+        el.ingredientName.textContent = s.name;
+        el.weighTitle.textContent = `${r.name} · ${s.name}`;
+        el.targetInput.value = s.target;
+        el.toleranceInput.value = s.tolerance;
+        stepWithinTolerance = false;
+        syncRecipeLabels();
+        renderChecklist();
+        updateNextGate();
+      }
+
+      function goToStep(index) {
+        const r = currentRecipe();
+        if (!r) return;
+        currentStepIndex = Math.max(0, Math.min(r.steps.length - 1, index));
+        loadCurrentStep();
+      }
+
+      function updateNextGate() {
+        const r = currentRecipe();
+        const atEnd = currentStepIndex >= r.steps.length - 1;
+        el.prevStep.disabled = currentStepIndex === 0;
+        el.nextStep.disabled = atEnd;
+        el.nextStep.classList.toggle("next-ready", stepWithinTolerance && !atEnd);
+        el.nextStep.textContent = atEnd ? "Recipe complete" : stepWithinTolerance ? "Next → ready" : "Next →";
       }
 
       function flashPanel() {
@@ -758,6 +1024,8 @@
           el.panel.classList.add("idle");
           el.statusText.textContent = "Switch scale to grams";
           el.deltaText.textContent = `Reading in ${unit}`;
+          stepWithinTolerance = false;
+          updateNextGate();
           flashPanel();
           return;
         }
@@ -766,20 +1034,25 @@
           el.panel.classList.add("idle");
           el.statusText.textContent = "Set a target";
           el.deltaText.textContent = `Live reading ${value.toFixed(0)} ${unit}`;
+          stepWithinTolerance = false;
         } else if (absDiff <= tol) {
           el.panel.classList.add("ok");
           el.statusText.textContent = "Perfect — within tolerance";
           el.deltaText.textContent = `${diff >= 0 ? "+" : ""}${diff.toFixed(0)} ${unit} from target`;
+          stepWithinTolerance = true;
         } else if (diff < 0) {
           el.panel.classList.add("under");
           el.statusText.textContent = "Keep adding";
           el.deltaText.textContent = `${absDiff.toFixed(0)} ${unit} under target`;
+          stepWithinTolerance = false;
         } else {
           el.panel.classList.add("over");
           el.statusText.textContent = "Too much — remove some";
           el.deltaText.textContent = `${absDiff.toFixed(0)} ${unit} over target`;
+          stepWithinTolerance = false;
         }
 
+        updateNextGate();
         flashPanel();
       }
 
@@ -917,7 +1190,26 @@
       el.targetInput.addEventListener("input", syncRecipeLabels);
       el.toleranceInput.addEventListener("input", syncRecipeLabels);
 
-      syncRecipeLabels();
+      el.recipeSelect.addEventListener("change", (e) => {
+        const idx = parseInt(e.target.value, 10);
+        if (!isNaN(idx)) {
+          currentRecipeIndex = idx;
+          currentStepIndex = 0;
+          loadCurrentStep();
+        }
+      });
+
+      el.prevStep.addEventListener("click", () => {
+        if (currentStepIndex > 0) goToStep(currentStepIndex - 1);
+      });
+
+      el.nextStep.addEventListener("click", () => {
+        const r = currentRecipe();
+        if (currentStepIndex < r.steps.length - 1) goToStep(currentStepIndex + 1);
+      });
+
+      renderRecipeSelect();
+      loadCurrentStep();
       updateDiagnostics();
       log("Brigaid standalone Bluetooth test loaded.");
     </script>
