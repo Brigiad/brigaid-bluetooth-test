@@ -111,8 +111,15 @@
         position: relative;
         background: var(--cream);
         border-radius: 42px;
-        overflow: hidden;
-        min-height: 760px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: clamp(640px, calc(100vh - 80px), 800px);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+      }
+
+      .device-screen::-webkit-scrollbar {
+        width: 0;
       }
 
       .status-bar {
@@ -169,13 +176,13 @@
       }
 
       .app {
-        padding: 6px 14px 28px;
+        padding: 6px 14px 0;
       }
 
       main {
         width: 100%;
         margin: 0 auto;
-        padding: 4px 0 24px;
+        padding: 4px 0 0;
       }
 
       @media (max-width: 460px) {
@@ -188,7 +195,7 @@
         }
         .device-screen {
           border-radius: 34px;
-          min-height: 86vh;
+          height: calc(100vh - 32px);
         }
         .app {
           padding: 4px 14px 30px;
@@ -317,6 +324,9 @@
         backdrop-filter: blur(14px);
         border-top: 1px solid var(--line);
         border-radius: 0 0 28px 28px;
+        position: sticky;
+        bottom: 0;
+        z-index: 5;
       }
 
       nav.tabs button {
